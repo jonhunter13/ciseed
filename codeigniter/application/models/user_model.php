@@ -5,24 +5,15 @@ class User_model extends CI_Model
 {
     private $student_table = "Student";
 
-    public function __construct ()
-    {
+    public function __construct (){
         parent::__construct();
+        $this->load->database();
     }
 
-    public function getUserByID ($id)
-    {
-//        $user = array(
-//                'id' => 11,
-//                "name" => "John",
-//                "surname" => "Doe",
-//                "age" => 41
-//        );
+    public function getUserByID ($id){
         return $this->db
-                ->where('id', $id)
-                ->get($this->student_table);
-        
-//        return $user;
+            ->where('id', $id)
+            ->get($this->student_table)->row();
     }
 
     public function get_users(){
@@ -35,22 +26,26 @@ class User_model extends CI_Model
             ->update($this->student_table, $data);
     }
 
-    public function randomize_users(){
+    public function randomize_user($id){
         $this->load->helper('string');
+        $username = random_string('alnum', 5);
+        $password = random_string('alnum', 16);
+        $data = array(
+            'user_name'=>$username,
+            'password'=>$password,
+        );
+        $this->update_user($id, $data);
+    }
+
+    public function randomize_users(){
         $students = $this->get_users();
         $num = 0;
         foreach($students->result() as $row){
-            $username = random_string('alnum', 5);
-            $password = random_string('alnum', 16);
-            $data = array(
-                'user_name'=>$username,
-                'password'=>$password,
-            );
-            $this->update_user($row->id, $data);
+            $this->randomize_user($row->id);
             $num++;
         }
         echo "Updated $num users";
-
+        
     }
 }
 
