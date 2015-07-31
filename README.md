@@ -13,4 +13,10 @@ https://github.com/agop/ciunit-framework/archive/master.zip
 
 
 #Jon's Notes
-Getting started
+Simple data manipulation page that randomizes a list of users at the click of a button.
+
+Application:
+http://localhost/ciseed/codeigniter/ or http://localhost/ciseed/ depending on how you startup your web server
+
+Completed unit tests here:
+http://localhost/ciseed/codeigniter/ciunit/UserModelTest
