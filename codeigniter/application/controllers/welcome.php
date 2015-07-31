@@ -2,6 +2,14 @@
 
 class Welcome extends CI_Controller {
 
+    function __construct() {
+        parent::__construct();
+
+        //testing out php enabled view
+//        $this->load->database();
+//        $this->load->model('user_model','Students');
+    }
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -19,7 +27,22 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+            //If the assignment allowed php in the view, I would call the model here to pass data to the view
+//            $data['students'] = $this->Students->get_users();
+//            $this->load->view('welcome_message', $data);
+            //in the view it would look something like this:
+            /*
+                <?php foreach($students->result() as $row):?>
+                <tr>
+                   <td><?=$row->id?></td>
+                   <td><?=$row->user_name?></td>
+                   <td><?=$row->password?></td>
+               </tr>
+               <?php endforeach; ?>
+             */
+
+            //not much to do here, output the html
+            $this->load->view('welcome_message');
 	}
 }
 
